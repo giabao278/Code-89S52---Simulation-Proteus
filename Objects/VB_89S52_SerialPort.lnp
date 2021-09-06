@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\uart.obj",
+".\Objects\lcd1602.obj",
+".\Objects\delay.obj" 
+TO ".\Objects\VB_89S52_SerialPort" 
+PRINT(".\Listings\VB_89S52_SerialPort.m51") RAMSIZE(256) 

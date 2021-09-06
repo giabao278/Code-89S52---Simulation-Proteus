@@ -1,0 +1,116 @@
+A51 MACRO ASSEMBLER  SERIALPORT_VB                                                        09/03/2021 17:00:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\SerialPort_VB.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE SerialPort_VB.asm SET(SMALL) DEBUG PRINT(.\Listings\SerialPort_VB.lst) 
+                      OBJECT(.\Objects\SerialPort_VB.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG             0000H
+0000 020030            2     LJMP    SETUP
+0030                   3     ORG             0030H
+                       4     
+0030                   5     SETUP:
+0030 759850            6             MOV             SCON,#50H       
+0033 E587              7             MOV             A,PCON          
+0035 D2E7              8             SETB    ACC.7           
+0037 F587              9             MOV             PCON,A          
+0039 758920           10             MOV             TMOD,#20H       
+003C 758DF3           11             MOV             TH1,#-13
+003F D28E             12             SETB    TR1                     
+0041                  13     LOOP:
+0041 1186             14             ACALL   RECEIVE_DATA
+0043 FF               15             MOV             R7,A
+0044 1148             16             ACALL   ON_LED
+0046 80F9             17             SJMP    LOOP
+                      18             
+0048                  19     ON_LED:
+0048 BF3103           20             CJNE    R7,#31H,LB1
+004B B290             21             CPL             P1.0
+004D 22               22             RET
+004E                  23             LB1:
+004E BF3203           24             CJNE    R7,#32H,LB2
+0051 B291             25             CPL             P1.1
+0053 22               26             RET
+0054                  27             LB2:
+0054 BF3303           28             CJNE    R7,#33H,LB3
+0057 B292             29             CPL             P1.2
+0059 22               30             RET
+005A                  31             LB3:
+005A BF3403           32             CJNE    R7,#34H,LB4
+005D B293             33             CPL             P1.3
+005F 22               34             RET
+0060                  35             LB4:
+0060 BF3503           36             CJNE    R7,#35H,LB5
+0063 B294             37             CPL             P1.4
+0065 22               38             RET
+0066                  39             LB5:
+0066 BF3603           40             CJNE    R7,#36H,LB6
+0069 B295             41             CPL             P1.5
+006B 22               42             RET
+006C                  43             LB6:
+006C BF3703           44             CJNE    R7,#37H,LB7
+006F B296             45             CPL             P1.6
+0071 22               46             RET
+0072                  47             LB7:
+0072 BF3803           48             CJNE    R7,#38H,LB8
+0075 B297             49             CPL             P1.7
+0077 22               50             RET
+0078                  51             LB8:
+0078 BF3004           52             CJNE    R7,#30H,LB9
+007B 7590FF           53             MOV             P1,#0FFH
+007E 22               54             RET
+007F                  55             LB9:
+007F BF3903           56             CJNE    R7,#39H,DONE
+0082 759000           57             MOV             P1,#00H
+A51 MACRO ASSEMBLER  SERIALPORT_VB                                                        09/03/2021 17:00:43 PAGE     2
+
+0085                  58             DONE:
+0085 22               59             RET
+                      60             
+0086                  61     RECEIVE_DATA:           
+0086 3098FD           62             JNB             RI,$                    
+0089 C298             63             CLR             RI
+008B E599             64             MOV             A,SBUF
+008D 22               65             RET
+                      66     
+                      67     END
+A51 MACRO ASSEMBLER  SERIALPORT_VB                                                        09/03/2021 17:00:43 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DONE . . . . . . .  C ADDR   0085H   A   
+LB1. . . . . . . .  C ADDR   004EH   A   
+LB2. . . . . . . .  C ADDR   0054H   A   
+LB3. . . . . . . .  C ADDR   005AH   A   
+LB4. . . . . . . .  C ADDR   0060H   A   
+LB5. . . . . . . .  C ADDR   0066H   A   
+LB6. . . . . . . .  C ADDR   006CH   A   
+LB7. . . . . . . .  C ADDR   0072H   A   
+LB8. . . . . . . .  C ADDR   0078H   A   
+LB9. . . . . . . .  C ADDR   007FH   A   
+LOOP . . . . . . .  C ADDR   0041H   A   
+ON_LED . . . . . .  C ADDR   0048H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RECEIVE_DATA . . .  C ADDR   0086H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SETUP. . . . . . .  C ADDR   0030H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
